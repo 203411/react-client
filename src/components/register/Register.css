@@ -1,0 +1,11 @@
+.box{
+}
+.container{
+    border: 2px rgb(241, 240, 240);
+    
+    padding: 25px;
+}
+
+.image{
+    border: 2px solid black;
+}

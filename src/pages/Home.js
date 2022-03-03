@@ -1,0 +1,12 @@
+import Navbar from "../components/navbar/Navbar";
+
+function Home(){
+    return(
+        
+        <div><Navbar></Navbar>
+            Holiwi
+        </div>
+    );
+}
+
+export default Home;
