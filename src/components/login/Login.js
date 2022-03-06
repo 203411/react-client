@@ -1,54 +1,76 @@
 import axios from "axios";
-import React, { Component } from "react";
 
-class Post extends Component {
-    state = {
-        user: "",
-        pass: ""
-    };
-    userChange = e => {
-        this.setState(
+import './Login.css';
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+function Login() {
+
+    const [logeo, setLogeo] = useState(false);
+
+    const consumir_login = () => {
+        let warnings = "";
+        var postData = {
+            username: document.getElementById('user-login').value,
+            password: document.getElementById('pass-login').value
+        }
+        axios.post("http://localhost:8000/api/v1/login/", postData, {
+            Headers:
             {
-                user: e.target.value
+                'Content-Type': 'application/json',
             }
-        );
-    };
-    passChange = e => {
-        this.setState(
-            {
-                pass: e.target.value
+        }).then((response) => {
+            console.log(response.data.token);
+            localStorage.setItem('token', response.data['token']);
+            localStorage.setItem('id_user', response.data['user_id']);
+            setLogeo(true);
+        }).catch((error) => {
+            console.log(error.response.data);
+            if (error.response.data.non_field_errors != null) {
+                warnings = error.response.data.non_field_errors[0];
+            } else {
+                if (error.response.data.username != null && error.response.data.password == null) {
+                    warnings = "Username is empty";
+                } else if (error.response.data.username == null && error.response.data.password != null) {
+                    warnings = "Password is empty";
+                } else {
+                    warnings = "Username and password are empty";
+                }
             }
-        );
+            document.getElementById("warning").textContent = warnings;
+            setLogeo(false);
+        });
     };
-    handleSubmit = e => {
-        e.preventDefault();
-        const data = {
-            username: this.state.user,
-            password: this.state.pass,
-        };
-        axios
-            .post("http://localhost:8000/api/v1/login/", data)
-            .then(res => console.log(res))
-            .catch(error => console.log(error));
-    };
-    render() {
-        return (
-            <div>
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Username:
-                        </label>
-                        <input type="text" value={this.state.user} onChange={this.userChange} required />
-                        <label>
-                            Password:
-                        </label>
-                        <input type="text" value={this.state.pass} onChange={this.passChange} required />
-                        <button type="submit">Login </button>
-                    </form>
+    return (
+        <div className="body">
+            <div className="container">
+                
+                <div className="formContainer">
+                    <div className="form">
+                        <h1>Login</h1>
+                        <div className="group">
+                            <input type="text" id="user-login" required /> <span className="border_bottom"></span>
+                            <label>Username</label>
+                        </div>
+                        <div className="group">
+                            <input type="password" id="pass-login" required /> <span className="border_bottom"></span>
+                            <label>Password</label>
+                        </div>
+                        <p id="warning"></p>
+                        <p>
+                            No tienes una cuenta?
+                            <NavLink to="/register" >  Registrate</NavLink>
+                        </p>
+                        <button type="submit" onClick={consumir_login}> Send </button>
+                        {(localStorage.getItem('token')!==null || logeo === true)&& <Navigate to={'/profile/'+localStorage.getItem('id_user')}/>}
+                    </div>
+                </div>
+                <div className="imgForm">
                 </div>
             </div>
-        );
-    }
+        </div>
+    )
 }
-export default Post;
+
+export default Login;

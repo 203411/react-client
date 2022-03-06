@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.body{
+    background: url("./wallpaper4.jpg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#userTitle{
+    color: rgb(0, 0, 0);
+    background: #fff;
+    border: none;
+    color: rgb(0, 0, 0);
+    top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.image{
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+
+.profileContainer{
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.50);
+    border-radius: 10px;
+    width: 45vw;
+    height: 600px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background: white;
+}
+
+.profileImg{
+    position: absolute;
+    top: 90px;
+    height: 200px;
+    display:grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.profileImg .bordeImg{
+    background: rgba(24, 20, 20, 0.63);
+    border-radius: 100%;
+    height: 201px;
+    width: 201px;
+}
+
+.profileImg img{
+    position: relative;
+    bottom: 200px;
+    height: 200px;
+    min-width: 100%;
+    clip-path: circle(at center);
+}
+
+p{
+    color: black;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+input[type="file"]{
+    cursor: pointer;
+}
+
+.profileInfo{
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.profileInfo .profileField{
+    display: flexbox;
+    margin: 1px 1px;
+    cursor: default;
+}
+
+
+.profileField input{
+    color: black;
+    border-bottom: #010820 1px solid;
+}
+
+.backLogin, .update button, .image button{
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #010820;
+    cursor: pointer;
+}
+

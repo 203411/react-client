@@ -1,4 +1,35 @@
-.active{
-    color:brown;
-    font-weight: bold;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar{
+    display: flex;
+    justify-content: flex-start;
+    text-decoration: none;
+
+}
+.navbar-right{
+    display: flex;
+    justify-content: flex-start;
+    text-decoration: none;
+    justify-content: flex-end;
+}
+h2{
+    font-size: 15px;
+    color: aliceblue;
+}
+.navbar-item{
+    padding: 10px;
+    margin-left: 5px;
+}
+.navbar-item:hover{
+    background-color: rgba(196, 228, 255, 0.493);
+}
+
+.content{
+    background-color: rgba(0, 0, 0, 0.897);
 }

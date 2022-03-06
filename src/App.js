@@ -1,10 +1,10 @@
 import './App.css';
-import Login2 from './components/login/Login2';
+import Login from './components/login/Login';
 import Register from './components/register/Register';
-import Home from './pages/Home';
+import Home from './components/home/Home';
 import Profile from './components/profile/Profile';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar';
+
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/register" element={<Register/>}>
           </Route>
 
-          <Route path='/login' element={<Login2/>}>
+          <Route path='/login' element={<Login/>}>
           </Route>
 
           <Route path='/profile/:id' element={<Profile/>}>
