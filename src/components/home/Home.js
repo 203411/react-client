@@ -1,5 +1,5 @@
 import Navbar from "../navbar/Navbar";
-import './Home.css';
+import home from './Home.module.css';
 
 function Home(){
     return(
@@ -7,9 +7,9 @@ function Home(){
             <Navbar></Navbar>
                 
             
-            <div className="body">
-                <div className="container">
-                    <div className="img">
+            <div className={home.body}>
+                <div className={home.container}>
+                    <div className={home.img}>
                         <h1>Hello World.</h1>
                         <p>
                             Aliqua cillum eiusmod aliqua amet aliquip exercitation.

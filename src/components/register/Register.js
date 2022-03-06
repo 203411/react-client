@@ -1,5 +1,5 @@
 import axios from "axios";
-import './Register.css';
+import register from './Register.module.css';
 import { NavLink,Navigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -34,33 +34,33 @@ function Register() {
     };
 
     return (
-        <div className="body">
-            <div className="container">
-                <div className={"formContainer"}>
+        <div className={register.body}>
+            <div className={register.container}>
+                <div className={register.formContainer}>
                     <h1>Register</h1>
-                    <div className="formRegister">
-                        <div className="group">
-                            <input type="text" id="firstName" required /> <span className="borderBottom"></span>
+                    <div className={register.formRegister}>
+                        <div className={register.group}>
+                            <input type="text" id="firstName" required /> <span className={register.borderBottom}></span>
                             <label>Name</label>
                         </div>
-                        <div className="group">
-                            <input type="text" id="lastName" required /> <span className="borderBottom"></span>
+                        <div className={register.group}>
+                            <input type="text" id="lastName" required /> <span className={register.borderBottom}></span>
                             <label>Last name</label>
                         </div>
-                        <div className="group">
-                            <input type="password" id="pass" required /> <span className="borderBottom"></span>
+                        <div className={register.group}>
+                            <input type="password" id="pass" required /> <span className={register.borderBottom}></span>
                             <label>Password</label>
                         </div>
-                        <div className="group">
-                            <input type="password" id="pass2" required /> <span className="borderBottom"></span>
+                        <div className={register.group}>
+                            <input type="password" id="pass2" required /> <span className={register.borderBottom}></span>
                             <label id="lbl-pass2">Confirm password</label>
                         </div>
-                        <div className="group">
-                            <input type="text" id="user" required /> <span className="borderBottom"></span>
+                        <div className={register.group}>
+                            <input type="text" id="user" required /> <span className={register.borderBottom}></span>
                             <label>Username</label>
                         </div>
-                        <div className="group">
-                            <input type="email" id="email" required /> <span className="borderBottom"></span>
+                        <div className={register.group}>
+                            <input type="email" id="email" required /> <span className={register.borderBottom}></span>
                             <label>Email</label>
                         </div>
                         <p id="message"></p>
@@ -68,7 +68,7 @@ function Register() {
                         <button type="submit" onClick={register_user}> Register </button>
                         {registro === true && <Navigate to={'/login'}/>}
                     </div>
-                    <div className="group">
+                    <div className={register.group}>
                         <p>
                             Ya tienes una cuenta?
                         <NavLink to="/login" > Inicia Sesion</NavLink>
@@ -76,7 +76,7 @@ function Register() {
                     </div>
                     
                 </div>
-                <div className="imgForm">
+                <div className={register.imgForm}>
                     
                 </div>
             </div>

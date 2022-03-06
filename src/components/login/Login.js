@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import './Login.css';
+import login from './Login.module.css';
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Navigate } from "react-router-dom";
@@ -43,18 +43,18 @@ function Login() {
         });
     };
     return (
-        <div className="body">
-            <div className="container">
+        <div className={login.body}>
+            <div className={login.container}>
                 
-                <div className="formContainer">
-                    <div className="form">
+                <div className={login.formContainer}>
+                    <div className={login.form}>
                         <h1>Login</h1>
-                        <div className="group">
-                            <input type="text" id="user-login" required /> <span className="border_bottom"></span>
+                        <div className={login.group}>
+                            <input type="text" id="user-login" required /> <span className={login.borderBottom}></span>
                             <label>Username</label>
                         </div>
-                        <div className="group">
-                            <input type="password" id="pass-login" required /> <span className="border_bottom"></span>
+                        <div className={login.group}>
+                            <input type="password" id="pass-login" required /> <span className={login.borderBottom}></span>
                             <label>Password</label>
                         </div>
                         <p id="warning"></p>
@@ -66,7 +66,7 @@ function Login() {
                         {(localStorage.getItem('token')!==null || logeo === true)&& <Navigate to={'/profile/'+localStorage.getItem('id_user')}/>}
                     </div>
                 </div>
-                <div className="imgForm">
+                <div className={login.imgForm}>
                 </div>
             </div>
         </div>

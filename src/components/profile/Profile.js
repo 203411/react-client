@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
-import './Profile.css';
+import profile from './Profile.module.css';
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
@@ -150,37 +149,37 @@ function Profile() {
     }
 
     return (
-        <div className="body">
-            <div className="profileContainer">
-                <div className="options">
+        <div className={profile.body}>
+            <div className={profile.profileContainer}>
+                <div className={profile.options}>
                     <button id="userTitle">User {user}</button>
-                    <button className="backLogin" onClick={cerrar_sesion}>Logout</button>
+                    <button className={profile.backLogin} onClick={cerrar_sesion}>Logout</button>
                 </div>
                 
-                <div className="profileImg">
-                    <div className="bordeImg"></div>
+                <div className={profile.profileImg}>
+                    <div className={profile.bordeImg}></div>
                     <img alt="error img" id="preview" />
                 </div>
-                <div className="image">
+                <div className={profile.image}>
                     <input accept="image/*" type="file" id="img"></input>
                     <button onClick={change_image}>Change Image</button>
                     <button onClick={delete_image}>Delete Image</button>
                 </div>
-                <div className="profileInfo">
-                    <div className="profileField">
+                <div className={profile.profileInfo}>
+                    <div className={profile.profileField}>
                         <p><b>First name: </b></p><input id="firstName"></input>
                     </div>
-                    <div className="profileField">
+                    <div className={profile.profileField}>
                         <p><b>Last name: </b></p><input id="lastName"></input>
                     </div>
-                    <div className="profileField">
+                    <div className={profile.profileField}>
                         <p><b>Username: </b></p><input id="username"></input>
                     </div>
-                    <div className="profileField">
+                    <div className={profile.profileField}>
                         <p><b>E-mail: </b></p><input id="email"></input>
                     </div>
                 </div>
-                <div className="update" onClick={change_profile}>
+                <div className={profile.update} onClick={change_profile}>
                     <button>
                         Change Profile
                     </button>
