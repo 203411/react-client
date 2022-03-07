@@ -1,15 +1,13 @@
 import axios from "axios";
 
 import login from './Login.module.css';
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { NavLink , useNavigate } from "react-router-dom";
 
 function Login() {
 
-    const [logeo, setLogeo] = useState(false);
-
+    const navigate = useNavigate();
     const consumir_login = () => {
+        
         let warnings = "";
         var postData = {
             username: document.getElementById('user-login').value,
@@ -24,7 +22,7 @@ function Login() {
             console.log(response.data.token);
             localStorage.setItem('token', response.data['token']);
             localStorage.setItem('id_user', response.data['user_id']);
-            setLogeo(true);
+            navigate("/profile");
         }).catch((error) => {
             console.log(error.response.data);
             if (error.response.data.non_field_errors != null) {
@@ -63,7 +61,7 @@ function Login() {
                             <NavLink to="/register" >  Registrate</NavLink>
                         </p>
                         <button type="submit" onClick={consumir_login}> Send </button>
-                        {(localStorage.getItem('token')!==null || logeo === true)&& <Navigate to={'/profile/'+localStorage.getItem('id_user')}/>}
+                        {/* {(localStorage.getItem('token')!==null || logeo === true)&& <Navigate to={'/profile/'+localStorage.getItem('id_user')}/>} */}
                     </div>
                 </div>
                 <div className={login.imgForm}>

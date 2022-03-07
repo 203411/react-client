@@ -20,7 +20,7 @@ function App() {
           <Route path='/login' element={<Login/>}>
           </Route>
 
-          <Route path='/profile/:id' element={<Profile/>}>
+          <Route path='/profile' element={<Profile/>}>
           </Route>
 
           <Route path='*' element={<div><h1>Not Found Page</h1></div>}>

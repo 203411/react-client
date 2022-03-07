@@ -1,10 +1,10 @@
 import axios from "axios";
 import register from './Register.module.css';
-import { NavLink,Navigate } from "react-router-dom";
-import { useState } from "react";
+import { NavLink,useNavigate } from "react-router-dom";
 
 function Register() {
-    const [registro, setRegistro] = useState(false);
+
+    let navigate = useNavigate();
     let warnings = "";
     const register_user = () => {
         var postData = {
@@ -24,7 +24,7 @@ function Register() {
         }).then((response) => {
             alert("Registro exitoso");
             console.log(response.data);
-            setRegistro(true);
+            navigate('/login');
         }).catch((error) => {
             console.log(error.response.data);
             warnings = error.response.data;
@@ -66,7 +66,7 @@ function Register() {
                         <p id="message"></p>
                         
                         <button type="submit" onClick={register_user}> Register </button>
-                        {registro === true && <Navigate to={'/login'}/>}
+                        
                     </div>
                     <div className={register.group}>
                         <p>

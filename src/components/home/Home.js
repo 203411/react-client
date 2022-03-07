@@ -5,8 +5,6 @@ function Home(){
     return(
         <div>
             <Navbar></Navbar>
-                
-            
             <div className={home.body}>
                 <div className={home.container}>
                     <div className={home.img}>
