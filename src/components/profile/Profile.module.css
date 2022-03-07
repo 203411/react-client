@@ -15,11 +15,10 @@
 }
 
 
-#userTitle{
-    color: rgb(0, 0, 0);
-    background: #fff;
+.userTitle{
+    background: rgba(255, 255, 255, 0);
     border: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     top: 20px;
     font-size: 20px;
     font-weight: bold;
@@ -38,14 +37,14 @@
 }
 
 .profileContainer{
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.50);
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.856);
     border-radius: 10px;
     width: 45vw;
     height: 600px;
     display: grid;
     justify-items: center;
     align-items: center;
-    background: white;
+    background: rgba(0, 0, 0, 0.89);
 }
 
 .profileImg{
@@ -58,7 +57,7 @@
 }
 
 .profileImg .bordeImg{
-    background: rgba(24, 20, 20, 0.63);
+    background: rgba(255, 255, 255, 0.63);
     border-radius: 100%;
     height: 201px;
     width: 201px;
@@ -73,7 +72,7 @@
 }
 
 p{
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: normal;
     margin-left: 5px;
 }
@@ -81,6 +80,7 @@ p{
 input[type="file"]{
     cursor: pointer;
 }
+
 
 .profileInfo{
     padding: 5px;
@@ -99,18 +99,23 @@ input[type="file"]{
 
 
 .profileField input{
-    color: black;
-    border-bottom: #010820 1px solid;
+    color: rgb(255, 255, 255);
+    border-bottom: #ffffff 1px solid;
+}
+
+.inputImage{
+    border:none;
+    color: transparent;
 }
 
 .backLogin, .update button, .image button{
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     margin: 5px;
     margin-top: 5px;
     padding: 10px;
-    background-color: #010820;
+    background-color: #ffffff;
     cursor: pointer;
 }
 

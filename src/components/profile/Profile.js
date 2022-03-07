@@ -152,7 +152,7 @@ function Profile() {
         <div className={profile.body}>
             <div className={profile.profileContainer}>
                 <div className={profile.options}>
-                    <button id="userTitle">User {user}</button>
+                    <button className={profile.userTitle}>User {user}</button>
                     <button className={profile.backLogin} onClick={cerrar_sesion}>Logout</button>
                 </div>
                 
@@ -161,7 +161,7 @@ function Profile() {
                     <img alt="error img" id="preview" />
                 </div>
                 <div className={profile.image}>
-                    <input accept="image/*" type="file" id="img"></input>
+                    <input className={profile.inputImage} accept="image/*" type="file" id="img"></input>
                     <button onClick={change_image}>Change Image</button>
                     <button onClick={delete_image}>Delete Image</button>
                 </div>
