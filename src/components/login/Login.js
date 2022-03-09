@@ -19,12 +19,10 @@ function Login() {
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            console.log(response.data.token);
             localStorage.setItem('token', response.data['token']);
             localStorage.setItem('id_user', response.data['user_id']);
             navigate("/profile");
         }).catch((error) => {
-            console.log(error.response.data);
             if (error.response.data.non_field_errors != null) {
                 warnings = error.response.data.non_field_errors[0];
             } else {
@@ -37,7 +35,7 @@ function Login() {
                 }
             }
             document.getElementById("warning").textContent = warnings;
-            setLogeo(false);
+           
         });
     };
     return (

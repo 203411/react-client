@@ -20,13 +20,10 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             }
         }).then((response) => {
-                console.log(response.data);
                 image_profile = "http://localhost:8000" + response.data.url_img;
-                console.log(image_profile);
                 document.getElementById('preview').src = image_profile;
                 window.location.reload();
             }).catch((error) => {
-                console.log(error.response.data);
                 if (error.response.data === "Metodo post no permitido") {
                     console.log("Enviar a un metodo put");
                     put_image();
@@ -44,12 +41,10 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             },
         }).then((response) => {
-            console.log(response.data);
             image_profile = "http://localhost:8000" + response.data.url_img;
             document.getElementById('preview').src = image_profile;
             window.location.reload();
         }).catch((error) => {
-            console.log(error.response.data);
             alert("No se pudo actualizar la imagen");
         });
     }
@@ -60,7 +55,6 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             }
         }).then((response) => {
-            console.log(response.data);
             alert("Imagen eliminada");
             image_profile = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
             document.getElementById('preview').url = image_profile;
@@ -74,7 +68,6 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             },
         }).then((response) => {
-                console.log(response.data);
                 if(response.data.url_img != null){
                     image_profile = "http://localhost:8000" + response.data.url_img;
                     document.getElementById('preview').src = image_profile;
@@ -82,7 +75,6 @@ function Profile() {
                     document.getElementById('preview').src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
                 }
             }).catch((error) => {
-                console.error("Error al obtener la imagen");
                 document.getElementById('preview').src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
             });
 
@@ -100,7 +92,7 @@ function Profile() {
             document.getElementById("email").placeholder = emailR;
             document.getElementById("username").placeholder = usernameR;
         }).catch((error)=>{
-            console.log(error.response.data);
+            alert("No se pudieron obtener los datos");
         })
     }
 
@@ -118,7 +110,7 @@ function Profile() {
             lastNamePut = last_nameR;
         }
         if(firstNamePut === ""){
-            lastNamePut = first_nameR;
+            firstNamePut = first_nameR;
         }
         if(emailPut === ""){
             emailPut = emailR;
@@ -134,7 +126,6 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            console.log(response.data);
             window.location.reload();
         }).catch((error)=>{
             alert("No se pudieron actualizar los datos");

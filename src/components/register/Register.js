@@ -23,10 +23,8 @@ function Register() {
             }
         }).then((response) => {
             alert("Registro exitoso");
-            console.log(response.data);
             navigate('/login');
         }).catch((error) => {
-            console.log(error.response.data);
             warnings = error.response.data;
         });
        
