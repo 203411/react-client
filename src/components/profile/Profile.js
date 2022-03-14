@@ -1,13 +1,27 @@
 import axios from "axios";
 import profile from './Profile.module.css';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Profile() {
 
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('id_user');
-    let image_profile = "";
-    let usernameR, first_nameR,last_nameR,emailR;
+
+    const [imagen, setImagen] = useState('');
+
+    const [username,setUsername] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const [usernameR,setUsernameR] = useState('');
+    const [first_nameR, setFirstNameR] = useState('');
+    const [last_nameR, setLastNameR] = useState('');
+    const [emailR, setEmailR] = useState('');
+
+    
+    const [form, setForm] = useState(false);
 
     const change_image = () => {
         let postData = new FormData();
@@ -20,15 +34,13 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             }
         }).then((response) => {
-                image_profile = "http://localhost:8000" + response.data.url_img;
-                document.getElementById('preview').src = image_profile;
-                window.location.reload();
-            }).catch((error) => {
-                if (error.response.data === "Metodo post no permitido") {
-                    console.log("Enviar a un metodo put");
-                    put_image();
-                }
-            })
+            setImagen("http://localhost:8000" + response.data.url_img);
+            get_imagen();
+        }).catch((error) => {
+            if (error.response.data === "Metodo post no permitido") {
+                put_image();
+            }
+        })
     }
 
     let put_image = () => {
@@ -41,12 +53,9 @@ function Profile() {
                 'Authorization': 'Token ' + token,
             },
         }).then((response) => {
-            image_profile = "http://localhost:8000" + response.data.url_img;
-            document.getElementById('preview').src = image_profile;
-            window.location.reload();
-        }).catch((error) => {
-            alert("No se pudo actualizar la imagen");
-        });
+            setImagen("http://localhost:8000" + response.data.url_img);
+            get_imagen();
+        })
     }
 
     let delete_image = () => {
@@ -56,87 +65,63 @@ function Profile() {
             }
         }).then((response) => {
             alert("Imagen eliminada");
-            image_profile = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-            document.getElementById('preview').url = image_profile;
-            window.location.reload();
+            setImagen("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
         });
     }
 
-    window.onload = function visualize_data() {
+    useEffect(()=>{
+        get_imagen();
+        get_perfil();
+    },[]);
+
+    let get_imagen = () =>{
         axios.get("http://localhost:8000/api/v1/user/perfil/" + user + "/", {
             headers: {
                 'Authorization': 'Token ' + token,
             },
         }).then((response) => {
                 if(response.data.url_img != null){
-                    image_profile = "http://localhost:8000" + response.data.url_img;
-                    document.getElementById('preview').src = image_profile;
+                    setImagen("http://localhost:8000" + response.data.url_img);
                 }else{
-                    document.getElementById('preview').src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+                    setImagen("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
                 }
             }).catch((error) => {
-                document.getElementById('preview').src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+                setImagen("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
             });
+    }
 
+    let get_perfil = () =>{
         axios.get("http://localhost:8000/api/v1/user/data/"+user+"/",{
             headers:{
                 'Authorization': 'Token ' + token,
             },
         }).then((response) =>{
-            usernameR = response.data.username;
-            first_nameR = response.data.first_name;
-            last_nameR = response.data.last_name;
-            emailR = response.data.email;
-            document.getElementById("firstName").placeholder = first_nameR;
-            document.getElementById("lastName").placeholder = last_nameR;
-            document.getElementById("email").placeholder = emailR;
-            document.getElementById("username").placeholder = usernameR;
+            setUsernameR(response.data.username);
+            setFirstNameR(response.data.first_name);
+            setLastNameR(response.data.last_name);
+            setEmailR(response.data.email);
         }).catch((error)=>{
             alert("No se pudieron obtener los datos");
         })
     }
 
     let change_profile = () =>{
-        let putData = new FormData();
-        let usernamePut = document.getElementById("username").value;
-        let lastNamePut = document.getElementById("lastName").value;
-        let firstNamePut = document.getElementById("firstName").value;
-        let emailPut = document.getElementById("email").value;
-
-        if(usernamePut === ""){
-            usernamePut = usernameR; 
+        let putData= {
+            username : username !== "" ? username : usernameR,
+            last_name : last_name !== "" ? last_name : last_nameR,
+            first_name : first_name !== "" ? first_name : first_nameR,
+            email : email !== "" ? email : emailR
         }
-        if(lastNamePut === ""){
-            lastNamePut = last_nameR;
-        }
-        if(firstNamePut === ""){
-            firstNamePut = first_nameR;
-        }
-        if(emailPut === ""){
-            emailPut = emailR;
-        }
-        putData.append("first_name",firstNamePut);
-        putData.append("last_name",lastNamePut);
-        putData.append("username",usernamePut);
-        putData.append("email",emailPut);
-
         axios.put("http://localhost:8000/api/v1/user/data/"+user+"/",putData,{
             headers:{
-                'Content-Type': 'multipart/form-data',
                 'Authorization': 'Token ' + token,
             }
         }).then((response)=>{
-            window.location.reload();
+            setForm(false);
+            get_perfil();
         }).catch((error)=>{
             alert("No se pudieron actualizar los datos");
-            console.log(error.response.data);
         })
-    }
-
-    const navigate = useNavigate();
-    let cerrar_sesion = () => {
-        localStorage.clear();
-        navigate("/");
     }
 
     return (
@@ -144,39 +129,69 @@ function Profile() {
             <div className={profile.profileContainer}>
                 <div className={profile.options}>
                     <button className={profile.userTitle}>User {user}</button>
-                    <button className={profile.backLogin} onClick={cerrar_sesion}>Logout</button>
+                    <button className={profile.backLogin} >Logout</button>
                 </div>
                 
                 <div className={profile.profileImg}>
                     <div className={profile.bordeImg}></div>
-                    <img alt="error img" id="preview" />
+                    <img src={imagen} alt="error img" />
                 </div>
                 <div className={profile.image}>
                     <input className={profile.inputImage} accept="image/*" type="file" id="img"></input>
                     <button onClick={change_image}>Change Image</button>
                     <button onClick={delete_image}>Delete Image</button>
+                    
                 </div>
-                <div className={profile.profileInfo}>
-                    <div className={profile.profileField}>
-                        <p><b>First name: </b></p><input id="firstName"></input>
+                {form ?
+                    <div className={profile.container}>
+                        <div className={profile.profileForm}>
+                            <div className={profile.profileField}>
+                                <p><b>First name: </b></p><input onChange={e => setFirstName(e.target.value)}></input>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>Last name: </b></p><input onChange={e => setLastName(e.target.value)}></input>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>Username: </b></p><input onChange={e => setUsername(e.target.value)}></input>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>E-mail: </b></p><input onChange={e => setEmail(e.target.value)}></input>
+                            </div>
+                        </div>
+                        <div className={profile.update} >
+                                <button onClick={()=>change_profile()}>
+                                    Save
+                                </button>
+                                <button onClick={()=> setForm(false)}>
+                                    Cancel
+                                </button>
+                            </div>
                     </div>
-                    <div className={profile.profileField}>
-                        <p><b>Last name: </b></p><input id="lastName"></input>
+                :
+                    <div className={profile.container}>
+                        <div className={profile.profileInfo}>
+                            <div className={profile.profileField}>
+                                <p><b>First name: </b></p>
+                                <p className={profile.profileData}>{first_nameR}</p>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>Last name: </b></p>
+                                <p className={profile.profileData}>{last_nameR}</p>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>Username: </b></p>
+                                <p className={profile.profileData}>{usernameR}</p>
+                            </div>
+                            <div className={profile.profileField}>
+                                <p><b>Email </b></p>
+                                <p className={profile.profileData}>{emailR}</p>
+                            </div>
+                        </div>
+                        <div className={profile.update}>
+                            <button onClick={() => setForm(!form)} >Change profile</button>
+                        </div>
                     </div>
-                    <div className={profile.profileField}>
-                        <p><b>Username: </b></p><input id="username"></input>
-                    </div>
-                    <div className={profile.profileField}>
-                        <p><b>E-mail: </b></p><input id="email"></input>
-                    </div>
-                </div>
-                <div className={profile.update} onClick={change_profile}>
-                    <button>
-                        Change Profile
-                    </button>
-                </div>
-                
-                
+                }
             </div>
            
         </div>

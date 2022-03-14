@@ -1,17 +1,19 @@
 import axios from "axios";
-
 import login from './Login.module.css';
 import { NavLink , useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Login() {
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('')
     const navigate = useNavigate();
     const consumir_login = () => {
         
         let warnings = "";
         var postData = {
-            username: document.getElementById('user-login').value,
-            password: document.getElementById('pass-login').value
+            username: username,
+            password: password
         }
         axios.post("http://localhost:8000/api/v1/login/", postData, {
             Headers:
@@ -37,7 +39,8 @@ function Login() {
             document.getElementById("warning").textContent = warnings;
            
         });
-    };
+    }
+
     return (
         <div className={login.body}>
             <div className={login.container}>
@@ -46,11 +49,11 @@ function Login() {
                     <div className={login.form}>
                         <h1>Login</h1>
                         <div className={login.group}>
-                            <input type="text" id="user-login" required /> <span className={login.borderBottom}></span>
+                            <input type="text" onChange={e => setUsername(e.target.value)}  required /> <span className={login.borderBottom}></span>
                             <label>Username</label>
                         </div>
                         <div className={login.group}>
-                            <input type="password" id="pass-login" required /> <span className={login.borderBottom}></span>
+                            <input type="password" onChange={e =>setPassword(e.target.value)} required /> <span className={login.borderBottom}></span>
                             <label>Password</label>
                         </div>
                         <p id="warning"></p>
@@ -58,8 +61,8 @@ function Login() {
                             No tienes una cuenta?
                             <NavLink to="/register" >  Registrate</NavLink>
                         </p>
-                        <button type="submit" onClick={consumir_login}> Send </button>
-                        {/* {(localStorage.getItem('token')!==null || logeo === true)&& <Navigate to={'/profile/'+localStorage.getItem('id_user')}/>} */}
+                        <button type="submit" onClick={() => consumir_login()}> Send </button>
+                       
                     </div>
                 </div>
                 <div className={login.imgForm}>

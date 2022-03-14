@@ -19,7 +19,7 @@
     background: rgba(255, 255, 255, 0);
     border: none;
     color: rgb(255, 255, 255);
-    top: 20px;
+    top: 10px;
     font-size: 20px;
     font-weight: bold;
 }
@@ -28,12 +28,13 @@
     display: flex;
     justify-content: space-between;
     width: 90%;
+    margin-top: 10px;
 }
 .image{
-    margin-top: 200px;
+    margin-top: 220px;
     display: flex;
     justify-content: space-around;
-    width: 90%;
+    width: 80%;
 }
 
 .profileContainer{
@@ -81,32 +82,51 @@ input[type="file"]{
     cursor: pointer;
 }
 
-
-.profileInfo{
+.profileForm, .profileInfo{
     padding: 5px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    width: 90%;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
-.profileInfo .profileField{
+.profileForm .profileField, .profileInfo .profileField{
     display: flexbox;
     margin: 1px 1px;
     cursor: default;
 }
 
+.profileData, .profileForm .profileField{
+    padding: 5px 0px 5px 2px;
+}
 
-.profileField input{
-    color: rgb(255, 255, 255);
+.profileField input, .profileData{
+    color:rgb(255, 255, 255);
     border-bottom: #ffffff 1px solid;
+}
+
+.profileInfo p{
+    margin: 5px;
 }
 
 .inputImage{
     border:none;
     color: transparent;
 }
+
+.container{
+    width: 90%;
+    padding-left: 5%;
+    height: 350px;
+    margin-top: 10px;
+}
+
+.update{
+    margin-top: 10px;
+    display: flex;
+    justify-content:center;
+}
+
 
 .backLogin, .update button, .image button{
     color: rgb(0, 0, 0);
