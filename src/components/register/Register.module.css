@@ -87,6 +87,11 @@ h1{
     margin: 10px;
 }
 
+.warning important{
+    font-size: 5px;
+    color: rgb(255, 121, 121);
+}
+
 input{
     background: none;
     font-size: 16px;

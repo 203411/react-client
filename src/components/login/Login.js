@@ -5,11 +5,11 @@ import { useState } from "react";
 
 function Login() {
 
+    let navigate =useNavigate();
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('')
-    const navigate = useNavigate();
+    const [password, setPassword] = useState('');
+
     const consumir_login = () => {
-        
         let warnings = "";
         var postData = {
             username: username,
@@ -23,7 +23,7 @@ function Login() {
         }).then((response) => {
             localStorage.setItem('token', response.data['token']);
             localStorage.setItem('id_user', response.data['user_id']);
-            navigate("/profile");
+            navigate('/profile',{replace:true});
         }).catch((error) => {
             if (error.response.data.non_field_errors != null) {
                 warnings = error.response.data.non_field_errors[0];

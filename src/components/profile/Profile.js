@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 function Profile() {
 
+    let navigate = useNavigate();
+
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('id_user');
 
@@ -129,7 +131,10 @@ function Profile() {
             <div className={profile.profileContainer}>
                 <div className={profile.options}>
                     <button className={profile.userTitle}>User {user}</button>
-                    <button className={profile.backLogin} >Logout</button>
+                    <button className={profile.backLogin} onClick={()=> {
+                        localStorage.clear();
+                        navigate('/login',{replace:true});
+                    }}>Logout</button>
                 </div>
                 
                 <div className={profile.profileImg}>
