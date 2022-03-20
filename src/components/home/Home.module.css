@@ -36,10 +36,6 @@ html, body
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)),url("./wallpaper3.jpg") no-repeat center ;
   background-size: cover;
   position: relative;
-}
-
-.img{
-  border-radius: 10px;
   height: 400px;
 }
 
